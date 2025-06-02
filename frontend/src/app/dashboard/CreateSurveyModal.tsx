@@ -28,7 +28,7 @@ export default function CreateSurveyModal({ isOpen, onClose, survey }: CreateSur
       setQuestions(
         survey.questions.map(q => ({
           text: q.text,
-          is_open_ended: q.isOpenEnded,
+          is_open_ended: q.is_open_ended,
           options: q.options.map(o => ({ text: o.text }))
         }))
       );
