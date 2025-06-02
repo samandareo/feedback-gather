@@ -16,9 +16,13 @@ app = FastAPI(title="Customer Feedback System API")
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins
+    allow_origins=[
+        "http://localhost:3000",  # Local development
+        "https://feedback-gather-inze.vercel.app",  # Production frontend
+        "https://*.vercel.app",  # Any Vercel subdomain
+    ],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allow_headers=["*"],
 )
 
