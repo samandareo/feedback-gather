@@ -1,6 +1,7 @@
 import { GraphQLClient } from 'graphql-request';
+import { API_URL } from '@/config';
 
-const GRAPHQL_URL = 'http://localhost:8000/graphql';
+const GRAPHQL_URL = `${API_URL}/graphql`;
 
 export const graphqlClient = new GraphQLClient(GRAPHQL_URL, {
   headers: {
