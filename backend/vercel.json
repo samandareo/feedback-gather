@@ -9,12 +9,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "main.py"
-    }
-  ],
-  "headers": [
-    {
-      "src": "/api/(.*)",
+      "dest": "main.py",
       "headers": [
         { "key": "Access-Control-Allow-Origin", "value": "https://feedback-gather-inze.vercel.app" },
         { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS" },
