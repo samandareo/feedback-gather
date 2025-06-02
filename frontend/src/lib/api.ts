@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { AuthResponse, LoginFormData, SignupFormData, Survey, Response, SurveyCreate } from '@/types';
-
-const API_URL = 'http://localhost:8000/api';
+import { API_URL as baseURL } from '@/config';
+const API_URL = `${baseURL}/api`;
 
 const api = axios.create({
   baseURL: API_URL,

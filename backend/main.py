@@ -19,8 +19,6 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",  # Local development
         "https://*.vercel.app",   # Vercel deployments
-        "https://feedback-gather-inze.vercel.app",  # Your frontend domain
-        "http://localhost:8000"   # Backend local development
     ],
     allow_credentials=True,
     allow_methods=["*"],

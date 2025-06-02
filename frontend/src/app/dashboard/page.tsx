@@ -8,6 +8,7 @@ import CreateSurveyModal from './CreateSurveyModal';
 import { graphqlClient, GET_SURVEYS, Survey, GetSurveysResponse } from '@/lib/graphql';
 import { useQueryClient } from '@tanstack/react-query';
 import { surveys as surveysApi } from '@/lib/api';
+import { API_URL } from '@/config';
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
@@ -26,7 +27,7 @@ export default function Dashboard() {
 
   const handleShare = async (surveyId: number) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/survey/${surveyId}/share`, {
+      const response = await fetch(`${API_URL}/api/survey/${surveyId}/share`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -44,7 +45,7 @@ export default function Dashboard() {
 
   const handleToggleSurvey = async (surveyId: number, currentStatus: boolean) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/surveys/${surveyId}/status?is_active=${!currentStatus}`, {
+      const response = await fetch(`${API_URL}/api/surveys/${surveyId}/status?is_active=${!currentStatus}`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
