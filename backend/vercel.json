@@ -8,14 +8,30 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/graphql",
       "dest": "main.py",
-      "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "https://feedback-gather-inze.vercel.app" },
-        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS" },
-        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization" },
-        { "key": "Access-Control-Allow-Credentials", "value": "true" }
-      ]
+      "methods": ["GET", "POST", "OPTIONS"],
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        "Access-Control-Allow-Credentials": "true"
+      }
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "main.py",
+      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        "Access-Control-Allow-Credentials": "true"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "main.py"
     }
   ]
 }
