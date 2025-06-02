@@ -13,16 +13,17 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Customer Feedback System API")
 
-# Configure CORS
+# Simple CORS configuration
+origins = [
+    "http://localhost:3000",
+    "https://feedback-gather-inze.vercel.app"
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",  # Local development
-        "https://feedback-gather-inze.vercel.app",  # Production frontend
-        "https://*.vercel.app",  # Any Vercel subdomain
-    ],
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
