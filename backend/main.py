@@ -19,6 +19,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",  # Local development
         "https://*.vercel.app",   # Vercel deployments
+        "https://feedback-gather-inze.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
