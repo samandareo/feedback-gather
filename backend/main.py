@@ -16,7 +16,7 @@ app = FastAPI(title="Customer Feedback System API")
 # Simple CORS configuration
 origins = [
     "http://localhost:3000",
-    "https://feedback-gather-inze.vercel.app",
+    "https://feedback-gather.vercel.app",
     "*",
     "https://*.vercel.app"
 ]
