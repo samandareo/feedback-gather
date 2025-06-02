@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { surveys } from '@/lib/api';
-import { QuestionCreate, SurveyCreate, Survey } from '@/types';
+import { QuestionCreate, SurveyCreate } from '@/types';
+import { Survey } from '@/lib/graphql';
 
 interface CreateSurveyModalProps {
   isOpen: boolean;
@@ -17,9 +18,9 @@ export default function CreateSurveyModal({ isOpen, onClose, survey }: CreateSur
   const [description, setDescription] = useState('');
   const [questions, setQuestions] = useState<Array<{
     text: string;
-    is_open_ended: boolean;
+    isOpenEnded: boolean;
     options: Array<{ text: string }>;
-  }>>([{ text: '', is_open_ended: true, options: [] }]);
+  }>>([{ text: '', isOpenEnded: true, options: [] }]);
 
   useEffect(() => {
     if (survey) {
@@ -28,14 +29,14 @@ export default function CreateSurveyModal({ isOpen, onClose, survey }: CreateSur
       setQuestions(
         survey.questions.map(q => ({
           text: q.text,
-          is_open_ended: q.is_open_ended,
+          isOpenEnded: q.isOpenEnded,
           options: q.options.map(o => ({ text: o.text }))
         }))
       );
     } else {
       setTitle('');
       setDescription('');
-      setQuestions([{ text: '', is_open_ended: true, options: [] }]);
+      setQuestions([{ text: '', isOpenEnded: true, options: [] }]);
     }
   }, [survey]);
 
@@ -46,7 +47,7 @@ export default function CreateSurveyModal({ isOpen, onClose, survey }: CreateSur
       onClose();
       setTitle('');
       setDescription('');
-      setQuestions([{ text: '', is_open_ended: true, options: [] }]);
+      setQuestions([{ text: '', isOpenEnded: true, options: [] }]);
     },
   });
 
@@ -59,15 +60,15 @@ export default function CreateSurveyModal({ isOpen, onClose, survey }: CreateSur
   });
 
   const addQuestion = () => {
-    setQuestions([...questions, { text: '', is_open_ended: true, options: [] }]);
+    setQuestions([...questions, { text: '', isOpenEnded: true, options: [] }]);
   };
 
   const updateQuestion = (index: number, field: string, value: any) => {
     const newQuestions = [...questions];
-    if (field === 'is_open_ended') {
+    if (field === 'isOpenEnded') {
       newQuestions[index] = {
         ...newQuestions[index],
-        is_open_ended: value,
+        isOpenEnded: value,
         options: value ? [] : [{ text: '' }],
       };
     } else {
@@ -101,9 +102,9 @@ export default function CreateSurveyModal({ isOpen, onClose, survey }: CreateSur
       description,
       questions: questions.map((q, index) => ({
         text: q.text,
-        is_open_ended: q.is_open_ended,
+        is_open_ended: q.isOpenEnded,
         order: index + 1,
-        options: q.options,
+        options: q.options.map(opt => ({ text: opt.text })),
       })),
     };
 
@@ -172,15 +173,15 @@ export default function CreateSurveyModal({ isOpen, onClose, survey }: CreateSur
                   <label className="flex items-center space-x-2 text-sm text-gray-700">
                     <input
                       type="checkbox"
-                      checked={question.is_open_ended}
-                      onChange={(e) => updateQuestion(questionIndex, 'is_open_ended', e.target.checked)}
+                      checked={question.isOpenEnded}
+                      onChange={(e) => updateQuestion(questionIndex, 'isOpenEnded', e.target.checked)}
                       className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                     />
                     <span>Open-ended question</span>
                   </label>
                 </div>
 
-                {!question.is_open_ended && (
+                {!question.isOpenEnded && (
                   <div className="space-y-2">
                     <label className="block text-sm font-medium text-gray-700">Options</label>
                     {question.options.map((option, optionIndex) => (
