@@ -153,7 +153,7 @@ export default function Dashboard() {
                       <h3 className="text-lg font-medium text-gray-900">
                         {survey.title}
                       </h3>
-                      {!survey.isActive && (
+                      {!survey.is_active && (
                         <span className="ml-2 px-2 py-1 text-xs font-semibold bg-gray-300 text-gray-800 rounded">Stopped</span>
                       )}
                     </div>
@@ -199,19 +199,19 @@ export default function Dashboard() {
                     <button
                       onClick={() => handleShare(survey.id)}
                       className="flex-1 px-3 py-2 text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                      disabled={!survey.isActive}
+                      disabled={!survey.is_active}
                     >
                       Share
                     </button>
                     <button
-                      onClick={() => handleToggleSurvey(survey.id, survey.isActive)}
+                      onClick={() => handleToggleSurvey(survey.id, survey.is_active)}
                       className={`flex-1 px-3 py-2 text-sm font-medium ${
-                        survey.isActive
+                        survey.is_active
                           ? 'text-red-600 hover:text-red-500'
                           : 'text-green-600 hover:text-green-500'
                       }`}
                     >
-                      {survey.isActive ? 'Stop Survey' : 'Activate Survey'}
+                      {survey.is_active ? 'Stop Survey' : 'Activate Survey'}
                     </button>
                     <Link
                       href={`/dashboard/responses/${survey.id}`}

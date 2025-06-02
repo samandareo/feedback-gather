@@ -45,7 +45,7 @@ export interface QuestionCreate {
 export interface Survey {
   id: number;
   title: string;
-  description: string;
+  description: string | null;
   created_at: string;
   updated_at: string;
   user_id: number;

@@ -32,8 +32,10 @@ export interface QuestionOption {
 
 export interface Question {
   id: number;
+  survey_id: number;
   text: string;
-  isOpenEnded: boolean;
+  is_open_ended: boolean;
+  order: number;
   options: QuestionOption[];
 }
 
@@ -41,8 +43,12 @@ export interface Survey {
   id: number;
   title: string;
   description: string | null;
-  isActive: boolean;
+  created_at: string;
+  updated_at: string;
+  user_id: number;
   questions: Question[];
+  share_token?: string;
+  is_active: boolean;
 }
 
 export interface GetSurveysResponse {
@@ -59,7 +65,11 @@ export const GET_SURVEYS = `
       id
       title
       description
-      isActive
+      created_at
+      updated_at
+      user_id
+      is_active
+      share_token
       questions {
         id
         text
@@ -79,7 +89,11 @@ export const GET_SURVEY = `
       id
       title
       description
-      isActive
+      created_at
+      updated_at
+      user_id
+      is_active
+      share_token
       questions {
         id
         text
